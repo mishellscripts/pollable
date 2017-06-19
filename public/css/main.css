@@ -1,0 +1,177 @@
+/****** Main Styling ******/
+html {
+	height: 100%;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	height: 100%;
+}
+
+#left-col, #right-col, .container-fluid, .row {
+	height: 100%;
+}
+
+h1 {
+	font-family: 'Roboto Slab', serif;	
+	position: relative;
+}
+
+.bg-accent {
+	background-color: #A2DED0;
+}
+
+.color-accent {
+	color: #A2DED0;	
+}
+
+/****** Unique to main page ******/
+.h1-pad {
+	padding: 20% 0% 10% 0%;
+}
+
+/***** Poll list ******/
+#poll-list li {
+	display: inline-block;
+	background-color: #ffffff;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 5px;
+}
+
+/****** Login Styling ******/
+
+.login {
+	margin: 86px auto 0 auto;
+	text-align: center;
+}
+
+#login-btn {
+	width: 225px;
+	padding: 7px 5px;
+}
+
+.btn p {
+	margin: 8px 0 0 0;
+	padding: 0;
+}
+
+.btn > img {
+	float: left;
+	margin-left: 10px
+}
+
+/****** Logo Div Styling ******/
+
+img {
+	margin: 0 auto;
+	display: block;
+}
+
+.clementine-text { /* Styling for the Clementine.js text */
+	padding: 0;
+	margin: -25px 0 0 0;
+	font-weight: 500;
+	font-size: 60px;
+	color: #FFA000;
+}
+
+/****** Click Styling ******/
+
+.btn-container {	/* Styling for the div that contains the buttons */
+	margin: -10px auto 0 auto;
+	text-align: center;
+}
+
+.btn {	/* Styling for buttons */
+	margin: 0 8px;
+	color: white;
+	display: inline-block;
+	border: 0;
+	font-size: 14px;
+	border-radius: 3px;
+	padding: 10px 5px;
+	width: 100px;
+	font-weight: 500;
+}
+
+.btn:focus {	/* Remove outline when hovering over button */
+	outline: none;
+}
+
+.btn:active {	/* Scale the button down by 10% when clicking on button */
+	transform: scale(0.9, 0.9);
+	-webkit-transform: scale(0.9, 0.9);
+	-moz-transform: scale(0.9, 0.9);
+}
+
+.btn-delete {	/* Styling for delete button */
+	background-color: #ECEFF1;
+	color: #212121;
+}
+
+#click-nbr {
+	font-weight: 400;
+}
+
+/****** Profile Styling ******/
+#user-stats {
+	border: solid 2px #000000;
+	margin: 0% 2%;
+}
+
+#user-stats h1, p {
+	position: relative;
+	left: 10%;
+}
+
+#menu-divide {
+	color: #FFFFFF;
+	display: inline;
+	margin: 0;
+}
+
+/****** Create poll styling ******/
+.box {
+	background-color: white;
+	width: 40%;
+	height: 40%;
+	margin: 2.5% 5%;
+	float: left;
+}
+
+.box:active {	/* Scale the box down by 10% when clicking on button */
+	transform: scale(0.9, 0.9);
+	-webkit-transform: scale(0.9, 0.9);
+	-moz-transform: scale(0.9, 0.9);
+}
+
+#poll-create-form {
+	width: 40%;
+	position: relative;
+	left: 30%;
+}
+
+.btn-small-add {
+	width: 30px;
+	padding: 5px;
+	float: left;
+}
+
+.btn-create {
+	float: right;
+}
+
+#poll-new-title {
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    font-size: 1.5em;
+    height: auto;
+    color: #000000;
+    text-decoration: underline #A2DED0;
+}

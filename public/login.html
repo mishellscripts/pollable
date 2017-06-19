@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>FCC Voting app</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+			<div class="col-md-6" id="left-col">
+				<a href="/auth/github">
+				<div class="btn bg-accent" id="login-btn">
+					<img src="/public/img/github_32px.png" alt="github logo" />
+					<p>Login with GitHub</p>
+				</div>
+				</a>
+			</div>
+			<div class="col-md-6 bg-accent" id="right-col">
+			</div>
+		</div>
+		
+		<script src="https://code.jquery.com/jquery-2.2.1.min.js"
+        integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+        crossorigin="anonymous"></script>
+		<script type="text/javascript" src="common/ajax-functions.js"></script>
+		<script type="text/javascript" src="controllers/clickController.client.js"></script>
+		<script type="text/javascript" src="controllers/userController.client.js"></script>
+		<script type="text/javascript" src="/public/js/main.js"></script>
+	</body>
+</html>
