@@ -4,8 +4,9 @@
 
    var profileId = document.querySelector('#profile-id') || null;
    var profileUsername = document.querySelector('#profile-username') || null;
-   var profileRepos = document.querySelector('#profile-repos') || null;
-   var displayName = document.querySelector('#display-name');
+   var profilePollsCreated = document.querySelector('#polls-created') || 0;
+   var profilePollsVoted = document.querySelector('#polls-voted') || 0;
+   var displayName = document.querySelector('#display-name') ||  'friend';
    var apiUrl = appUrl + '/api/:id';
 
    function updateHtmlElement (data, element, userProperty) {

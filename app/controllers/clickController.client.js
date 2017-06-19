@@ -2,19 +2,19 @@
 
 (function () {
 
-   var addButton = document.querySelector('.btn-add');
-   var deleteButton = document.querySelector('.btn-delete');
-   var clickNbr = document.querySelector('#click-nbr');
+   var newButton = document.querySelector('.btn-new');
+   var viewButton = document.querySelector('.btn-view');
+   //var pollNum = document.querySelector('#click-nbr');
    var apiUrl = appUrl + '/api/:id/clicks';
 
-   function updateClickCount (data) {
+   /*function updateClickCount (data) {
       var clicksObject = JSON.parse(data);
       clickNbr.innerHTML = clicksObject.clicks;
-   }
+   }*/
 
-   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
+   //ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
 
-   addButton.addEventListener('click', function () {
+   /*newButton.addEventListener('click', function () {
 
       ajaxFunctions.ajaxRequest('POST', apiUrl, function () {
          ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
@@ -22,12 +22,12 @@
 
    }, false);
 
-   deleteButton.addEventListener('click', function () {
+   viewButton.addEventListener('click', function () {
 
       ajaxFunctions.ajaxRequest('DELETE', apiUrl, function () {
          ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
       });
 
-   }, false);
+   }, false);*/
 
 })();

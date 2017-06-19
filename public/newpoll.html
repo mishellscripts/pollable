@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-
 <html>
 	<head>
-		<title>FCC Voting app</title>
+		<title>Create a new poll</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300" rel="stylesheet">
@@ -10,15 +9,27 @@
 	<body>
 		<div class="container-fluid">
 			<div class="row">
-			<div class="col-md-6" id="left-col">
-				<a href="/auth/github">
-				<div class="btn bg-accent" id="login-btn">
-					<img src="/public/img/github_32px.png" alt="github logo" />
-					<p>Login with GitHub</p>
-				</div>
-				</a>
+			<div class="col-md-6 text-center" id="left-col">
+				<h1 class="h1-pad">Create your own</h1>
+				<form id="poll-create-form" method="post" enctype="multipart/form-data">
+	 			<div class="form-group" id="poll-choices" choices=2>
+	 				<input type="text" class="form-control" id="poll-new-title" placeholder="Title">
+	 				<input type="text" class="form-control poll-new-option" placeholder="Answer choice">
+    				<input type="text" class="form-control poll-new-option" placeholder="Answer choice">
+  				</div>
+  			<button type="button" class="btn bg-accent btn-small-add">+</button> 
+  			<button type="submit" class="btn btn-create bg-accent">Create</button>
+  		</form>
 			</div>
 			<div class="col-md-6 bg-accent" id="right-col">
+				<h3>How you would like to display your data?</h3>
+				<div class="box box1"></div>
+				<div class="box box2"></div>
+				<div class="box box3"></div>
+				<div class="box box4"></div>
+				<div id="poll-choices">
+
+				</div>
 			</div>
 		</div>
 		
@@ -30,4 +41,5 @@
 		<script type="text/javascript" src="controllers/userController.client.js"></script>
 		<script type="text/javascript" src="/public/js/main.js"></script>
 	</body>
+
 </html>
