@@ -19,11 +19,12 @@ module.exports = function (app, passport) {
 
 	app.route('/poll/new')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/newpoll.html');
+			res.render('newpoll');
 		})
 		.post(isLoggedIn, function (req, res) {
 			// Depending on # choices n, create array size n initialized to zeros
-			var numVotes = Array.apply(null, Array(req.body.choice.length)).map(Number.prototype.valueOf,0);
+			var numVotes = Array.apply(null, Array(req.body.choice.length))
+							.map(Number.prototype.valueOf,0);
 			var poll = new Poll({
 				title: req.body.title,
     			creator: req.user,
@@ -45,20 +46,24 @@ module.exports = function (app, passport) {
 		
 	app.route('/poll/:pollid')
 		.get(isLoggedIn, function(req, res) {
-			res.render('pollview');
 			Poll.findOne({'_id': req.params.pollid}, function(err, target) {
-				res.send(target);		
+				res.render('pollview', {poll: target});
 			})
 		});
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/index.html');
+			Poll.find({}, function (err, allPolls) {
+        		if (err) res.render('index', {polls: err.message});
+
+    		}).sort({'stats.createdAt': -1}).then(function(allPolls) {
+    			res.render('index', {polls: allPolls});
+    		});
 		});
 
 	app.route('/login')
 		.get(function (req, res) {
-			res.sendFile(path + '/public/login.html');
+			res.render('login');
 		});
 
 	app.route('/logout')
@@ -69,7 +74,7 @@ module.exports = function (app, passport) {
 
 	app.route('/profile')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/profile.html');
+			res.render('profile');
 		});
 
 	app.route('/api/:id')

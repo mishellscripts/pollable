@@ -30,6 +30,9 @@ app.use(passport.session());
 app.use(bodyParser.json());                        
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/public')
+
 routes(app, passport);
 
 var port = process.env.PORT || 8080;

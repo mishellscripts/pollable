@@ -27,12 +27,12 @@ h1 {
 	color: #A2DED0;	
 }
 
-/****** Unique to main page ******/
+/****** For pages with less content ******/
 .h1-pad {
 	padding: 20% 0% 10% 0%;
 }
 
-/***** Poll list ******/
+/***** Poll list for main & profile page ******/
 #poll-list li {
 	display: inline-block;
 	background-color: #ffffff;
@@ -63,22 +63,7 @@ h1 {
 	margin-left: 10px
 }
 
-/****** Logo Div Styling ******/
-
-img {
-	margin: 0 auto;
-	display: block;
-}
-
-.clementine-text { /* Styling for the Clementine.js text */
-	padding: 0;
-	margin: -25px 0 0 0;
-	font-weight: 500;
-	font-size: 60px;
-	color: #FFA000;
-}
-
-/****** Click Styling ******/
+/****** Button Styling ******/
 
 .btn-container {	/* Styling for the div that contains the buttons */
 	margin: -10px auto 0 auto;
@@ -111,10 +96,6 @@ img {
 .btn-delete {	/* Styling for delete button */
 	background-color: #ECEFF1;
 	color: #212121;
-}
-
-#click-nbr {
-	font-weight: 400;
 }
 
 /****** Profile Styling ******/
@@ -159,7 +140,7 @@ img {
 	-moz-transform: scale(0.9, 0.9);
 }
 
-#poll-create-form {
+#poll-form {
 	width: 40%;
 	position: relative;
 	left: 30%;

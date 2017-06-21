@@ -1,0 +1,36 @@
+doctype html
+html
+	head
+		title Profile | Your polls and stats
+		link(rel='shortcut icon', type='image/icon', href='/public/img/pollable_logo.ico')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		link(href='/public/css/main.css', rel='stylesheet', type='text/css')
+		link(href='https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300', rel='stylesheet')
+	body
+		.container-fluid
+			.row
+				#left-col.col-md-6
+					a.menu.home(href='/') Home
+					p#menu-divide |
+					a.menu.logout(href='/logout') Logout
+					#user-stats
+						h1 Your stats
+						p
+							span Username: 
+							span#profile-username.profile-value
+						p
+							span Display Name: 
+							span#display-name.profile-value
+						p
+							span Polls created: 
+							span#polls-created.profile-value
+						p
+							span Polls voted: 
+							span#polls-voted.profile-value
+				#right-col.col-md-6.bg-accent
+					h1 Your polls made with 
+		script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
+		script(type='text/javascript', src='common/ajax-functions.js')
+		script(type='text/javascript', src='controllers/clickController.client.js')
+		script(type='text/javascript', src='controllers/userController.client.js')
+		script(type='text/javascript', src='/public/js/main.js')

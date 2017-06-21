@@ -1,0 +1,27 @@
+doctype html
+html
+	head
+		title Pollable | #{poll.title}
+		link(rel='shortcut icon', type='image/icon', href='/public/img/pollable_logo.ico')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		link(href='/public/css/main.css', rel='stylesheet', type='text/css')
+		link(href='https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300', rel='stylesheet')
+	body
+		.container-fluid
+			.row
+				#left-col.col-md-6.text-center
+					h1.h1-pad #{poll.title}
+					form#poll-form(method='post')
+						#poll-choices.form-group
+						each choice in poll.choiceStrings
+							div
+								label
+									input(type='radio', name='optradio')
+									| choice
+						button.btn.btn-vote.bg-accent(type='submit') Vote
+				#right-col.col-md-6.bg-accent
+			script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
+			script(type='text/javascript', src='common/ajax-functions.js')
+			script(type='text/javascript', src='controllers/clickController.client.js')
+			script(type='text/javascript', src='controllers/userController.client.js')
+			script(type='text/javascript', src='/public/js/main.js')
