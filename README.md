@@ -10,7 +10,7 @@ Demo: https://pollable-mishellscripts.c9users.io/
 
 ## Quick Start Guide
 
-If the demo link is not working and you would like to view the application, follow these steps. If you're already a pro, meaning, you have everything in the next section installed, skip ahead to Installation & Startup. 
+If the demo link is not working and you would like to view the application, follow these steps. If you have everything in the next section installed, skip ahead to Installation & Startup. 
 
 ### Prerequisites
 
@@ -42,9 +42,8 @@ $ npm install
 Please follow [this guide](http://www.clementinejs.com/tutorials/tutorial-passport.html#GitHubAppSetup) to register the application with GitHub and get API keys / secrets.
 
 ### Setup MongoDB
-Coming soon. For now, I highly recommend using [mLab](https://mlab.com/) to host your MongoDB. It's free for 500MB and enough for your testing purposes.
 
-Once complete, connect to your database by typ
+Coming soon. For now, I highly recommend using [mLab](https://mlab.com/) to host your MongoDB. It's free for 500MB and enough for your testing purposes.
 
 ### Local Environment Variables
 
@@ -59,6 +58,7 @@ APP_URL=http://localhost:8080/
 ```
 
 ### Ready to Go
+
 Ensure that you have connection to your MongoDB database. Connect to your database by typing the following in the terminal:
 
 ```bash
