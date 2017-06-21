@@ -87,7 +87,7 @@ img {
 
 .btn {	/* Styling for buttons */
 	margin: 0 8px;
-	color: white;
+	color: #000000;
 	display: inline-block;
 	border: 0;
 	font-size: 14px;
@@ -99,6 +99,7 @@ img {
 
 .btn:focus {	/* Remove outline when hovering over button */
 	outline: none;
+	color: #ffffff;
 }
 
 .btn:active {	/* Scale the button down by 10% when clicking on button */
@@ -136,10 +137,20 @@ img {
 /****** Create poll styling ******/
 .box {
 	background-color: white;
-	width: 40%;
-	height: 40%;
-	margin: 2.5% 5%;
+	width: 35%;
+	height: 37%;
+	margin: 3% 5%;
 	float: left;
+	border: dotted 2px #000000;
+	border-radius: 100%;
+	text-align: center;
+}
+
+.box i {
+   font-size: 9em;
+   -webkit-text-stroke: 5px white;
+   margin-top: 25%;
+   color: #383838;
 }
 
 .box:active {	/* Scale the box down by 10% when clicking on button */

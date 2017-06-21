@@ -1,6 +1,7 @@
+$('body').hide().fadeIn('fast');
+
 $(document).ready(function() {
     $('#poll-new-title').focus();
-    $('body').hide().fadeIn('fast');
     
     $('.btn-new').click(function(){
         var link = $(this).attr('href');
@@ -42,7 +43,7 @@ $(document).ready(function() {
         // Max is 5 choices
         var choices = Number.parseInt($('#poll-choices').attr('choices'));
         if (choices < 5) {
-            $('#poll-choices').append('<input type="text" class="form-control poll-new-option" placeholder="Answer choice">');
+            $('#poll-choices').append('<input type="text" name="choice" class="form-control poll-new-option" placeholder="Answer choice">');
             $('#poll-choices').attr('choices', choices+1);
             //console.log($('#poll-choices').attr('choices'));
         }
@@ -51,4 +52,10 @@ $(document).ready(function() {
             // Display error
         }
     });
+    
+    /** Form 
+    $(".btn-create").click(function(){
+        var title = $("#poll-new-title").val();
+        $.post("/poll/new",{title: title}, function(data){});
+    });**/
 })

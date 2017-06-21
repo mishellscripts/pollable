@@ -2,6 +2,8 @@
 
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+var Poll = require('../models/polls.js');
+var User = require('../models/users.js');
 
 module.exports = function (app, passport) {
 
@@ -15,19 +17,40 @@ module.exports = function (app, passport) {
 
 	var clickHandler = new ClickHandler();
 
-<<<<<<< HEAD
-=======
 	app.route('/poll/new')
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/newpoll.html');
+		})
+		.post(isLoggedIn, function (req, res) {
+			// Depending on # choices n, create array size n initialized to zeros
+			var numVotes = Array.apply(null, Array(req.body.choice.length)).map(Number.prototype.valueOf,0);
+			var poll = new Poll({
+				title: req.body.title,
+    			creator: req.user,
+    			choiceStrings: req.body.choice,
+    			choiceVotes: numVotes
+        	})
+        	poll.save(function(err) {
+            	if (err) throw err;
+            });
+            
+            // Find user and update user info
+            User.findOneAndUpdate({'github.id': req.user.github.id}, 
+            			{ $push: { polls: poll }, $inc: {pollsCreated: 1} }, 
+            			function(err) { 
+            				if (err) throw err; 
+            				res.redirect('/poll/' + poll._id);
+            			});
 		});
 		
-	app.route('poll/:pollid')
-		.post(isLoggedIn, function (req, res) {
-			res.send('hi');	
+	app.route('/poll/:pollid')
+		.get(isLoggedIn, function(req, res) {
+			res.render('pollview');
+			Poll.findOne({'_id': req.params.pollid}, function(err, target) {
+				res.send(target);		
+			})
 		});
 
->>>>>>> bc9140951f0f3f3f3f1b737511a42c2017f8544d
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/index.html');
