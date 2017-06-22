@@ -72,11 +72,6 @@ h1 {
 	-moz-transform: scale(0.9, 0.9);
 }
 
-.btn-delete {	/* Styling for delete button */
-	background-color: #ECEFF1;
-	color: #212121;
-}
-
 /****** Login Styling ******/
 .login-container {
 	position: relative;
@@ -125,27 +120,96 @@ h1 {
 	margin: 0;
 }
 
+/****** Error page ******/
+.large-text {
+	font-size: 5em;
+}
+
+/****** View poll page ******/
+#poll-form ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#poll-form ul li{
+  color: #AAAAAA;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border: 1px solid #AAAAAA;
+}
+
+#poll-form ul li label{
+  display: block;
+  position: relative;
+  font-weight: 300;
+  font-size: 1.35em;
+  z-index: 9;
+  margin-top: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.25s linear;
+}
+
+#poll-form ul li:hover label{
+    color: #A2DED0;
+}
+
+#poll-form ul li .check{
+  display: block;
+  position: absolute;
+  border: 5px solid #AAAAAA;
+  border-radius: 100%;
+  height: 25px;
+  width: 25px;
+  top: 10px;
+  left: 20px;
+    z-index: 5;
+    transition: border .25s linear;
+    -webkit-transition: border .25s linear;
+}
+
+#poll-form ul li:hover .check {
+  border: 5px solid #A2DED0;
+}
+
+#poll-form ul li .check::before {
+  display: block;
+  position: absolute;
+  content: '';
+  border-radius: 100%;
+  height: 15px;
+  width: 15px;
+  margin: auto;
+  transition: background 0.25s linear;
+  -webkit-transition: background 0.25s linear;
+}
+
+#poll-form input[type=radio]:checked ~ .check {
+  border: 5px solid #A2DED0;
+}
+
+#poll-form input[type=radio]:checked ~ .check::before{
+  background: #A2DED0;
+}
+
+#poll-form input[type=radio]:checked ~ label{
+  color: #A2DED0;
+}
+
 /****** Create poll styling ******/
-#data-display-form label input{
-    margin:0;padding:0;
-    -webkit-appearance:none;
-       -moz-appearance:none;
-            appearance:none;
+input[type=radio]{
+  position: absolute;
+  visibility: hidden;
 }
 
-#data-display-form label {
-	margin: 3% 5%;
+.data-options label {
+	margin: 5% 10%;
 	float: left;
-	/*border: solid 2px #000000;
-	background-color: white;
-	border-radius: 100%;*/
 	text-align: center;
-}
-
-#data-display-form label i {
-   font-size: 9em;
-   /*-webkit-text-stroke: 5px white;*/
-   color: #383838;
+	font-size: 10em;
+    /*-webkit-text-stroke: 5px white;*/
+    color: #383838;
 }
 
 .push-down {	/* Scale the box down by 10% when clicking on button */
@@ -180,10 +244,6 @@ h1 {
     height: auto;
     color: #000000;
     text-decoration: underline #A2DED0;
-}
-
-.large-text {
-	font-size: 5em;
 }
 
 #data-display {

@@ -19,21 +19,20 @@ html
 							input.form-control.poll-new-option(type='text', name='choice', placeholder='Answer choice')
 						button.btn.bg-accent.btn-small-add(type='button') +
 						button.btn.btn-create.bg-accent(type='submit' onclick="submitForms()") Create
-				#right-col.col-md-6.bg-accent
+				#right-col.col-md-6.bg-accent.data-options
 					h3 How you would like to display your data?
-					form#data-display-form(method='post')
-						label
-							input(type='radio', name='data-choice', value='area') 
-							i.fa.fa-area-chart(aria-hidden='true')					
-						label
-							input(type='radio', name='data-choice', value='bar')
-							i.fa.fa-bar-chart(aria-hidden='true')
-						label
-							input(type='radio', name='data-choice', value='line')
-							i.fa.fa-line-chart(aria-hidden='true')
-						label
-							input(type='radio', name='data-choice', value='pie')
-							i.fa.fa-pie-chart(aria-hidden='true')
+					label
+						input(type='radio', name='data-choice', value='area') 
+						i.fa.fa-area-chart(aria-hidden='true')					
+					label
+						input(type='radio', name='data-choice', value='bar')
+						i.fa.fa-bar-chart(aria-hidden='true')
+					label
+						input(type='radio', name='data-choice', value='line')
+						i.fa.fa-line-chart(aria-hidden='true')
+					label
+						input(type='radio', name='data-choice', value='pie')
+						i.fa.fa-pie-chart(aria-hidden='true')
 			script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
 			script(src='https://use.fontawesome.com/82d62de1e5.js')
 			script(type='text/javascript', src='common/ajax-functions.js')

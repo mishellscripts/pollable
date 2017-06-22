@@ -1,9 +1,9 @@
 'use strict';
 
 var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var Poll = require('../models/polls.js');
 var User = require('../models/users.js');
+var async = require('async');
 
 module.exports = function (app, passport) {
 
@@ -14,8 +14,6 @@ module.exports = function (app, passport) {
 			res.redirect('/login');
 		}
 	}
-
-	var clickHandler = new ClickHandler();
 
 	app.route('/poll/new')
 		.get(isLoggedIn, function (req, res) {
@@ -30,7 +28,7 @@ module.exports = function (app, passport) {
     			creator: req.user,
     			choiceStrings: req.body.choice,
     			choiceVotes: numVotes,
-    			display: req.body['data-display'] || 'bar'
+    			display: req.body['data-display'] || 'bar' //default value
         	});
         	
         	poll.save(function(err) {
@@ -50,13 +48,13 @@ module.exports = function (app, passport) {
            							message: "Oh, no! Error encountered"
            						});	
            					}
-         					else return res.redirect('/poll/' + poll._id);
+         					return res.redirect('/poll/' + poll._id);
          				}
          			);
            		}
         	});
 		});
-			
+	
 	app.route('/poll/:pollid')
 		.get(function(req, res) {
 			Poll.findOne({'_id': req.params.pollid}, function(err, target) {
@@ -64,10 +62,45 @@ module.exports = function (app, passport) {
 					err.status = 404;
            			return res.render('error', {errStatus: err.status,
            					message: "Oh, no! Poll not found :<" });
-				} else {
-					res.render('pollview', {poll: target});
 				}
+				res.render('pollview', {poll: target});
 			});
+		})
+		// post - Cast a vote
+		.post(isLoggedIn, function(req, res) {
+			async.waterfall([
+		    function(callback){
+		        Poll.findOne({'_id': req.params.pollid}, function(err, target) {
+				if (err) {
+					return res.render('error', {errStatus: err.status,
+           							message: "Oh, no! Error encountered"});
+				} 
+				// Find index of choice and store it
+				var choiceIndex = target.choiceStrings.indexOf(req.body.choice);
+				var votes = target.choiceVotes;
+				votes[choiceIndex]+=1;
+		        callback(null, votes);
+		    })},
+		    function(votes, callback){
+				User.findOneAndUpdate({'github.id': req.user.github.id}, 
+            		{ $inc: {pollsVoted: 1} });
+		        Poll.findOneAndUpdate({'_id': req.params.pollid}, 
+				{$set: {choiceVotes: votes}, $push: {voters: req.user}, $inc: {'stats.numVotes': 1}}, 
+				function(err, target) {
+					if (err) {
+					return res.render('error', {errStatus: err.status,
+           						message: "Oh, no! Error encountered"});
+					} 
+					else res.send(target);
+				});
+		    },
+		], function (err,result) {
+		    if (err) {
+				return res.render('error', {errStatus: err.status,
+           					message: "Oh, no! Error encountered"});
+			} 
+		    console.log(result);
+		});
 		});
 
 	app.route('/')
@@ -75,7 +108,7 @@ module.exports = function (app, passport) {
 			Poll.find({}, function (err, allPolls) {
         		if (err) res.render('index', {polls: err.message});
     		}).sort({'stats.createdAt': -1}).then(function(allPolls) {
-    			res.render('index', {polls: allPolls});
+    			res.render('index', {user: req.user, polls: allPolls});
     		});
 		});
 
@@ -119,11 +152,6 @@ module.exports = function (app, passport) {
 			});
 		});
 
-	app.route('/api/:id')
-		.get(isLoggedIn, function (req, res) {
-			res.json(req.user.github);
-		});
-
 	app.route('/auth/github')
 		.get(passport.authenticate('github'));
 
@@ -132,9 +160,4 @@ module.exports = function (app, passport) {
 			successRedirect: '/',
 			failureRedirect: '/login'
 		}));
-
-	app.route('/api/:id/clicks')
-		.get(isLoggedIn, clickHandler.getClicks)
-		.post(isLoggedIn, clickHandler.addClick)
-		.delete(isLoggedIn, clickHandler.resetClicks);
 };

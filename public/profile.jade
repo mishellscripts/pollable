@@ -16,19 +16,15 @@ html
 					#user-stats
 						h1 Your stats
 						p
-							span Username: 
-							span#profile-username.profile-value
+							span Username: #{user.github.username}
 						p
-							span Display Name: 
-							span#display-name.profile-value
+							span Display Name: #{user.github.displayName}
 						p
 							span Polls created: #{user.pollsCreated}
-							span#polls-created.profile-value
 						p
 							span Polls voted: #{user.pollsVoted}
-							span#polls-voted.profile-value
 				#right-col.col-md-6.bg-accent
-					h1 Your polls made with x3
+					h1 Your polls made with <3
 					#poll-list
 						each poll in polls
 							li

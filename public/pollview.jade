@@ -10,16 +10,17 @@ html
 		.container-fluid
 			.row
 				#left-col.col-md-6.text-center
-					h1.h1-pad #{poll.title}
-					h3 #{poll.display}
-					form#poll-form(method='post')
-						#poll-choices.form-group
-						each choice in poll.choiceStrings
-							div
-								label
-									input(type='radio', name='optradio')
-									| choice
-						button.btn.btn-vote.bg-accent(type='submit') Vote
+					.form
+						form#poll-form(method='post')
+							h1.h1-pad #{poll.title}
+							ul
+								each choice in poll.choiceStrings
+									li
+										input(type='radio', id="#{choice}" value="#{choice}" name='choice')  
+										label(for="#{choice}")
+											|	#{choice}
+										.check
+							button.btn.btn-vote.bg-accent(type='submit') Vote
 				#right-col.col-md-6.bg-accent
 			script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
 			script(type='text/javascript', src='common/ajax-functions.js')
