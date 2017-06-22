@@ -35,6 +35,10 @@ app.set('views', __dirname + '/public')
 
 routes(app, passport);
 
+app.get('*', function(req, res){
+  res.render('error', {errStatus: 404, message: "Page not found :c"});
+});
+
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
 	console.log('Node.js listening on port ' + port + '...');

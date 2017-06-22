@@ -10,9 +10,10 @@ var User = new Schema({
 		displayName: String,
 		username: String
 	},
-   polls: [{type: mongoose.Schema.Types.ObjectId, ref:'Poll'}],
-   pollsVoted: Number,
-   pollsCreated: Number
+	username: String,
+	polls: [{type: mongoose.Schema.Types.ObjectId, ref:'Poll'}],
+	pollsVoted: {type: Number, default: 0},
+	pollsCreated: {type: Number, default: 0}
 });
 
 module.exports = mongoose.model('User', User);

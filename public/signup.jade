@@ -1,7 +1,7 @@
 doctype html
 html
 	head
-		title Pollable | Login
+		title Create your account
 		link(rel='shortcut icon', type='image/icon', href='/public/img/pollable_logo.ico')
 		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
 		link(href='/public/css/main.css', rel='stylesheet', type='text/css')
@@ -9,21 +9,13 @@ html
 	body
 		.container-fluid
 			.row
-				#left-col.col-md-6
-					.login-container
-						h1 Login
-						div
-							//form#login-form(method='post')
-							//	input.form-control(type='text', name='login-username', placeholder='Username')
-							//	input.form-control(type='password', name='login-password', placeholder='Password')
-							//	div 
-							//		button.btn.btn-login.bg-accent(type='submit') Login
-							//div 
-							//	button.btn.btn-signup.bg-accent(onclick="location.href='/signup'" type='submit') Sign Up
-							a(href='/auth/github')
-								#github-btn.btn.bg-accent
-									img(src='/public/img/github_32px.png', alt='github logo')
-									p Login with GitHub	
+				#left-col.col-md-6.text-center
+					h1.h1-pad Sign Up
+					div
+						form#signup-form(method='post')
+							input.form-control(type='text', name='login-username', placeholder='Username')
+							input.form-control(type='password', name='login-password', placeholder='Password')
+							button.btn.btn-signup.bg-accent(type='submit') Sign Up
 				#right-col.col-md-6.bg-accent
 			script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
 			script(type='text/javascript', src='common/ajax-functions.js')

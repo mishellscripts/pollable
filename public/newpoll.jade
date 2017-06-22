@@ -14,24 +14,28 @@ html
 					form#poll-form(method='post')
 						#poll-choices.form-group(choices='2')
 							input#poll-new-title.form-control(type='text', name='title', placeholder='Type your title here')
+							input#data-display.form-control(type='text', name='data-display')
 							input.form-control.poll-new-option(type='text', name='choice', placeholder='Answer choice')
 							input.form-control.poll-new-option(type='text', name='choice', placeholder='Answer choice')
 						button.btn.bg-accent.btn-small-add(type='button') +
-						button.btn.btn-create.bg-accent(type='submit') Create
+						button.btn.btn-create.bg-accent(type='submit' onclick="submitForms()") Create
 				#right-col.col-md-6.bg-accent
 					h3 How you would like to display your data?
-					.box.box1
-						i.fa.fa-area-chart(aria-hidden='true')
-					.box.box2
-						i.fa.fa-bar-chart(aria-hidden='true')
-					.box.box3
-						i.fa.fa-line-chart(aria-hidden='true')
-					.box.box4
-						i.fa.fa-pie-chart(aria-hidden='true')
-					#poll-choices
+					form#data-display-form(method='post')
+						label
+							input(type='radio', name='data-choice', value='area') 
+							i.fa.fa-area-chart(aria-hidden='true')					
+						label
+							input(type='radio', name='data-choice', value='bar')
+							i.fa.fa-bar-chart(aria-hidden='true')
+						label
+							input(type='radio', name='data-choice', value='line')
+							i.fa.fa-line-chart(aria-hidden='true')
+						label
+							input(type='radio', name='data-choice', value='pie')
+							i.fa.fa-pie-chart(aria-hidden='true')
 			script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
 			script(src='https://use.fontawesome.com/82d62de1e5.js')
 			script(type='text/javascript', src='common/ajax-functions.js')
-			script(type='text/javascript', src='controllers/clickController.client.js')
 			script(type='text/javascript', src='controllers/userController.client.js')
 			script(type='text/javascript', src='/public/js/main.js')

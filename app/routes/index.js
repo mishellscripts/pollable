@@ -29,33 +29,51 @@ module.exports = function (app, passport) {
 				title: req.body.title,
     			creator: req.user,
     			choiceStrings: req.body.choice,
-    			choiceVotes: numVotes
-        	})
+    			choiceVotes: numVotes,
+    			display: req.body['data-display'] || 'bar'
+        	});
+        	
         	poll.save(function(err) {
-            	if (err) throw err;
-            });
-            
-            // Find user and update user info
-            User.findOneAndUpdate({'github.id': req.user.github.id}, 
-            			{ $push: { polls: poll }, $inc: {pollsCreated: 1} }, 
+            	if (err) {
+            		err.status = 400;
+            		return res.render('error', {errStatus: err.status, 
+            			message: "Please enter a title and at least 2 choices for your poll"
+            		});
+            	}
+            	else {
+            		// Find user and update user info
+	        		User.findOneAndUpdate({'github.id': req.user.github.id}, 
+            		{ $push: { polls: poll }, $inc: {pollsCreated: 1} }, 
             			function(err) { 
-            				if (err) throw err; 
-            				res.redirect('/poll/' + poll._id);
-            			});
+           					if (err) {
+           						return res.render('error', {errStatus: err.status,
+           							message: "Oh, no! Error encountered"
+           						});	
+           					}
+         					else return res.redirect('/poll/' + poll._id);
+         				}
+         			);
+           		}
+        	});
 		});
-		
+			
 	app.route('/poll/:pollid')
-		.get(isLoggedIn, function(req, res) {
+		.get(function(req, res) {
 			Poll.findOne({'_id': req.params.pollid}, function(err, target) {
-				res.render('pollview', {poll: target});
-			})
+				if (err) { 				
+					err.status = 404;
+           			return res.render('error', {errStatus: err.status,
+           					message: "Oh, no! Poll not found :<" });
+				} else {
+					res.render('pollview', {poll: target});
+				}
+			});
 		});
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
 			Poll.find({}, function (err, allPolls) {
         		if (err) res.render('index', {polls: err.message});
-
     		}).sort({'stats.createdAt': -1}).then(function(allPolls) {
     			res.render('index', {polls: allPolls});
     		});
@@ -65,6 +83,20 @@ module.exports = function (app, passport) {
 		.get(function (req, res) {
 			res.render('login');
 		});
+		
+	/*app.route('/signup')
+		.get(function(req, res) {
+			res.render('signup');
+		});
+		.post(function (req, res) {
+			 User.register(new User({ username : req.body.username }), req.body.password, 
+				function(err, account) {
+			 		if (err) { return res.render('register', { account : account }); }
+			 		passport.authenticate('local')(req, res, function () {
+		            res.redirect('/');
+		        });
+			});
+		});*/
 
 	app.route('/logout')
 		.get(function (req, res) {
@@ -74,7 +106,17 @@ module.exports = function (app, passport) {
 
 	app.route('/profile')
 		.get(isLoggedIn, function (req, res) {
-			res.render('profile');
+			var pollIDs = req.user.polls;
+			var polls = [];
+			pollIDs.forEach(function(pollID) {
+				Poll.findOne({'_id': pollID}, function(err, pollByID) {
+            		if (err) throw err;
+            		polls.push(pollByID);
+            		if (pollIDs.length === polls.length) {
+            			res.render('profile', {polls: polls, user: req.user});
+            		}
+            	})
+			});
 		});
 
 	app.route('/api/:id')

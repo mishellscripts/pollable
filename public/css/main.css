@@ -41,37 +41,15 @@ h1 {
 	margin: 5px;
 }
 
-/****** Login Styling ******/
-
-.login {
-	margin: 86px auto 0 auto;
-	text-align: center;
-}
-
-#login-btn {
-	width: 225px;
-	padding: 7px 5px;
-}
-
-.btn p {
-	margin: 8px 0 0 0;
-	padding: 0;
-}
-
-.btn > img {
-	float: left;
-	margin-left: 10px
-}
-
 /****** Button Styling ******/
 
 .btn-container {	/* Styling for the div that contains the buttons */
-	margin: -10px auto 0 auto;
+	margin: 0 auto;
 	text-align: center;
 }
 
 .btn {	/* Styling for buttons */
-	margin: 0 8px;
+	margin-top: 5px;
 	color: #000000;
 	display: inline-block;
 	border: 0;
@@ -80,6 +58,7 @@ h1 {
 	padding: 10px 5px;
 	width: 100px;
 	font-weight: 500;
+	margin: 0px 10px;
 }
 
 .btn:focus {	/* Remove outline when hovering over button */
@@ -96,6 +75,37 @@ h1 {
 .btn-delete {	/* Styling for delete button */
 	background-color: #ECEFF1;
 	color: #212121;
+}
+
+/****** Login Styling ******/
+.login-container {
+	position: relative;
+	left: 30%;
+	margin-top: 20%;
+}
+
+.btn-login {
+	margin-top: 5%;
+	padding: 7px 5px;
+}
+
+#login-form input, .btn-login, .btn-signup, #github-btn {
+	width: 40%;
+}
+
+#login-form input {
+		position: relative;
+	left: 30%;
+}
+
+.btn p {
+	margin: 8px 60px 0px 0px;
+	padding: 0;
+}
+
+.btn > img {
+	float: left;
+	margin-left: 10px
 }
 
 /****** Profile Styling ******/
@@ -116,25 +126,29 @@ h1 {
 }
 
 /****** Create poll styling ******/
-.box {
-	background-color: white;
-	width: 35%;
-	height: 37%;
+#data-display-form label input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+#data-display-form label {
 	margin: 3% 5%;
 	float: left;
-	border: dotted 2px #000000;
-	border-radius: 100%;
+	/*border: solid 2px #000000;
+	background-color: white;
+	border-radius: 100%;*/
 	text-align: center;
 }
 
-.box i {
+#data-display-form label i {
    font-size: 9em;
-   -webkit-text-stroke: 5px white;
-   margin-top: 25%;
+   /*-webkit-text-stroke: 5px white;*/
    color: #383838;
 }
 
-.box:active {	/* Scale the box down by 10% when clicking on button */
+.push-down {	/* Scale the box down by 10% when clicking on button */
 	transform: scale(0.9, 0.9);
 	-webkit-transform: scale(0.9, 0.9);
 	-moz-transform: scale(0.9, 0.9);
@@ -166,4 +180,12 @@ h1 {
     height: auto;
     color: #000000;
     text-decoration: underline #A2DED0;
+}
+
+.large-text {
+	font-size: 5em;
+}
+
+#data-display {
+	display: none;
 }

@@ -53,9 +53,9 @@ $(document).ready(function() {
         }
     });
     
-    /** Form 
-    $(".btn-create").click(function(){
-        var title = $("#poll-new-title").val();
-        $.post("/poll/new",{title: title}, function(data){});
-    });**/
+    $("input[name='data-choice']").click(function(){
+        var chosen = $("input[name='data-choice']:checked").val();
+        $('#data-display').val(chosen);
+        $('this').addClass('push-down');
+    });
 })

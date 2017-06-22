@@ -1,27 +1,18 @@
 {
-  "name": "clementinejs-fcc",
+  "name": "pollable",
   "version": "1.0.1",
-  "description": "The elegant and lightweight boilerplate for full stack JavaScript.",
+  "description": "Simplistic application where users can create polls and contribute by voting",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnstonbl01/clementinejs-fcc"
+    "url": "https://github.com/mishellscripts/pollable"
   },
-  "homepage": "http://www.clementinejs.com/",
-  "bugs": "https://github.com/johnstonbl01/clementinejs-fcc/issues",
-  "keywords": [
-    "MongoDB",
-    "Mongoose",
-    "full stack",
-    "Express",
-    "Node",
-    "javascript",
-    "boilerplate"
-  ],
+  "homepage": "https://pollable-mishellscripts.c9users.io/",
+  "bugs": "https://github.com/mishellscripts/pollable/issues",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Blake Johnston",
+  "author": "Michelle Song",
   "license": "MIT",
   "dependencies": {
     "body-parser": "*",

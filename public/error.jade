@@ -1,0 +1,15 @@
+doctype html
+html
+	head
+		title Error #{errStatus}
+		link(rel='shortcut icon', type='image/icon', href='/public/img/pollable_logo.ico')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		link(href='/public/css/main.css', rel='stylesheet', type='text/css')
+		link(href='https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300', rel='stylesheet')
+	body.text-center
+		.container
+			if errStatus == 404
+				h1.color-accent.large-text 404
+			else	
+				h1.color-accent.large-text ¯\(°_o)/¯
+			h1 #{message}
