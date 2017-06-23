@@ -22,7 +22,11 @@ html
 										.check
 							button.btn.btn-vote.bg-accent(type='submit') Vote
 				#right-col.col-md-6.bg-accent
+					canvas(id="pollChart")
 			script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
+			script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js', type='text/javascript')
 			script(type='text/javascript', src='common/ajax-functions.js')
-			script(type='text/javascript', src='controllers/userController.client.js')
+			script(type='text/javascript').
+				var data = JSON.parse('!{JSON.stringify(poll)}');
 			script(type='text/javascript', src='/public/js/main.js')
+			script(type='text/javascript', src="/public/js/polls.js")

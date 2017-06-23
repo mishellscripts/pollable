@@ -1,9 +1,9 @@
 'use strict';
 
-var path = process.cwd();
 var Poll = require('../models/polls.js');
 var User = require('../models/users.js');
-var async = require('async');
+var polls = require('./polls.js');
+
 
 module.exports = function (app, passport) {
 
@@ -20,39 +20,7 @@ module.exports = function (app, passport) {
 			res.render('newpoll');
 		})
 		.post(isLoggedIn, function (req, res) {
-			// Depending on # choices n, create array size n initialized to zeros
-			var numVotes = Array.apply(null, Array(req.body.choice.length))
-							.map(Number.prototype.valueOf,0);
-			var poll = new Poll({
-				title: req.body.title,
-    			creator: req.user,
-    			choiceStrings: req.body.choice,
-    			choiceVotes: numVotes,
-    			display: req.body['data-display'] || 'bar' //default value
-        	});
-        	
-        	poll.save(function(err) {
-            	if (err) {
-            		err.status = 400;
-            		return res.render('error', {errStatus: err.status, 
-            			message: "Please enter a title and at least 2 choices for your poll"
-            		});
-            	}
-            	else {
-            		// Find user and update user info
-	        		User.findOneAndUpdate({'github.id': req.user.github.id}, 
-            		{ $push: { polls: poll }, $inc: {pollsCreated: 1} }, 
-            			function(err) { 
-           					if (err) {
-           						return res.render('error', {errStatus: err.status,
-           							message: "Oh, no! Error encountered"
-           						});	
-           					}
-         					return res.redirect('/poll/' + poll._id);
-         				}
-         			);
-           		}
-        	});
+			polls.createPoll(req,res);
 		});
 	
 	app.route('/poll/:pollid')
@@ -66,47 +34,14 @@ module.exports = function (app, passport) {
 				res.render('pollview', {poll: target});
 			});
 		})
-		// post - Cast a vote
 		.post(isLoggedIn, function(req, res) {
-			async.waterfall([
-		    function(callback){
-		        Poll.findOne({'_id': req.params.pollid}, function(err, target) {
-				if (err) {
-					return res.render('error', {errStatus: err.status,
-           							message: "Oh, no! Error encountered"});
-				} 
-				// Find index of choice and store it
-				var choiceIndex = target.choiceStrings.indexOf(req.body.choice);
-				var votes = target.choiceVotes;
-				votes[choiceIndex]+=1;
-		        callback(null, votes);
-		    })},
-		    function(votes, callback){
-				User.findOneAndUpdate({'github.id': req.user.github.id}, 
-            		{ $inc: {pollsVoted: 1} });
-		        Poll.findOneAndUpdate({'_id': req.params.pollid}, 
-				{$set: {choiceVotes: votes}, $push: {voters: req.user}, $inc: {'stats.numVotes': 1}}, 
-				function(err, target) {
-					if (err) {
-					return res.render('error', {errStatus: err.status,
-           						message: "Oh, no! Error encountered"});
-					} 
-					else res.send(target);
-				});
-		    },
-		], function (err,result) {
-		    if (err) {
-				return res.render('error', {errStatus: err.status,
-           					message: "Oh, no! Error encountered"});
-			} 
-		    console.log(result);
-		});
+			polls.vote(req, res);
 		});
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
 			Poll.find({}, function (err, allPolls) {
-        		if (err) res.render('index', {polls: err.message});
+        		if (err) return res.render('index', {polls: err.message});
     		}).sort({'stats.createdAt': -1}).then(function(allPolls) {
     			res.render('index', {user: req.user, polls: allPolls});
     		});
