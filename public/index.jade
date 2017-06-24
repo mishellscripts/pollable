@@ -10,6 +10,11 @@ html
 		.container-fluid
 			.row
 				#left-col.col-md-6.text-center
+					nav 
+						a.menu.home(href='/') 
+							img(src='/public/img/pollable_logo.ico')
+						a.menu.logout(href='/logout') 
+							i(class="fa fa-sign-out" aria-hidden="true")
 					h1.h1-pad
 						| Hello, 
 						span#display-name.color-accent #{user.github.displayName}
@@ -24,5 +29,6 @@ html
 							li
 								a(href="/poll/#{poll.id}") #{poll.title}
 			script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
+			script(src='https://use.fontawesome.com/82d62de1e5.js')
 			script(type='text/javascript', src='common/ajax-functions.js')
 			script(type='text/javascript', src='/public/js/main.js')

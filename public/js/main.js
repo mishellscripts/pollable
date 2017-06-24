@@ -56,6 +56,5 @@ $(document).ready(function() {
     $("input[name='data-choice']").click(function(){
         var chosen = $("input[name='data-choice']:checked").val();
         $('#data-display').val(chosen);
-        $('this').addClass('push-down');
     });
 })

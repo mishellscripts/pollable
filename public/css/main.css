@@ -27,21 +27,22 @@ h1 {
 	color: #A2DED0;	
 }
 
-/****** For pages with less content ******/
-.h1-pad {
-	padding: 20% 0% 10% 0%;
+a, a:hover, a:visited {
+	color: #000000;
+	text-decoration: none;
 }
 
-/***** Poll list for main & profile page ******/
-#poll-list li {
-	display: inline-block;
-	background-color: #ffffff;
-	border-radius: 10px;
-	padding: 5px;
-	margin: 5px;
+nav {
+	background-color: red;
 }
 
-/****** Button Styling ******/
+.home {
+	float: left;
+}
+
+.logout {
+	float: right;
+}
 
 .btn-container {	/* Styling for the div that contains the buttons */
 	margin: 0 auto;
@@ -61,8 +62,7 @@ h1 {
 	margin: 0px 10px;
 }
 
-.btn:focus {	/* Remove outline when hovering over button */
-	outline: none;
+.btn:hover {
 	color: #ffffff;
 }
 
@@ -70,7 +70,36 @@ h1 {
 	transform: scale(0.9, 0.9);
 	-webkit-transform: scale(0.9, 0.9);
 	-moz-transform: scale(0.9, 0.9);
+	border-color: #ffffff;
 }
+
+.btn:focus {
+	outline:0 !important;
+}
+
+
+/****** For pages with less content ******/
+.h1-pad {
+	padding: 20% 0% 10% 0%;
+}
+
+
+/***** Poll list for main & profile page ******/
+#poll-list li {
+	display: inline-block;
+	background-color: #ffffff;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 5px;
+	font-size: 1.2em;
+}
+
+#poll-list li:hover {
+	transform: scale(1.2, 1.2);
+	-webkit-transform: scale(1.2, 1.2);
+	-moz-transform: scale(1.2, 1.2);
+}
+
 
 /****** Login Styling ******/
 .login-container {
@@ -103,6 +132,7 @@ h1 {
 	margin-left: 10px
 }
 
+
 /****** Profile Styling ******/
 #user-stats {
 	border: solid 2px #000000;
@@ -120,10 +150,12 @@ h1 {
 	margin: 0;
 }
 
+
 /****** Error page ******/
 .large-text {
 	font-size: 5em;
 }
+
 
 /****** View poll page ******/
 #poll-form ul{
@@ -197,6 +229,19 @@ h1 {
   color: #A2DED0;
 }
 
+.btn-vote {
+	margin-top: 10px;
+}
+
+#pollChart {
+	background-color: #ffffff;
+	margin-top: 15%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 500px;
+}
+
+
 /****** Create poll styling ******/
 input[type=radio]{
   position: absolute;
@@ -210,12 +255,6 @@ input[type=radio]{
 	font-size: 10em;
     /*-webkit-text-stroke: 5px white;*/
     color: #383838;
-}
-
-.push-down {	/* Scale the box down by 10% when clicking on button */
-	transform: scale(0.9, 0.9);
-	-webkit-transform: scale(0.9, 0.9);
-	-moz-transform: scale(0.9, 0.9);
 }
 
 #poll-form {
