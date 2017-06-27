@@ -17,7 +17,7 @@ module.exports = function (app, passport) {
 
 	app.route('/poll/new')
 		.get(isLoggedIn, function (req, res) {
-			res.render('newpoll');
+			res.render('newpoll', {loggedIn: true});
 		})
 		.post(isLoggedIn, function (req, res) {
 			polls.createPoll(req,res);
@@ -25,31 +25,30 @@ module.exports = function (app, passport) {
 	
 	app.route('/poll/:pollid')
 		.get(function(req, res) {
-			Poll.findOne({'_id': req.params.pollid}, function(err, target) {
-				if (err) { 				
-					err.status = 404;
-           			return res.render('error', {errStatus: err.status,
-           					message: "Oh, no! Poll not found :<" });
-				}
-				res.render('pollview', {poll: target});
-			});
+			polls.getPoll(req, res);
 		})
 		.post(isLoggedIn, function(req, res) {
 			polls.vote(req, res);
-		});
+		})
+		.delete(isLoggedIn, function(req,res) {
+			polls.deletePoll(req, res);
+		})
+		;
+		
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
 			Poll.find({}, function (err, allPolls) {
         		if (err) return res.render('index', {polls: err.message});
     		}).sort({'stats.createdAt': -1}).then(function(allPolls) {
-    			res.render('index', {user: req.user, polls: allPolls});
+    			res.render('index', {user: req.user, polls: allPolls, 
+    									loggedIn: true});
     		});
 		});
 
 	app.route('/login')
 		.get(function (req, res) {
-			res.render('login');
+			res.render('login', {loggedIn: false});
 		});
 		
 	/*app.route('/signup')
@@ -81,7 +80,8 @@ module.exports = function (app, passport) {
             		if (err) throw err;
             		polls.push(pollByID);
             		if (pollIDs.length === polls.length) {
-            			res.render('profile', {polls: polls, user: req.user});
+            			res.render('profile', {polls: polls, user: req.user, 
+            								loggedIn: true});
             		}
             	})
 			});

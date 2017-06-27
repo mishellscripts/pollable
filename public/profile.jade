@@ -1,34 +1,22 @@
-doctype html
-html
-	head
-		title Profile | Your polls and stats
-		link(rel='shortcut icon', type='image/icon', href='/public/img/pollable_logo.ico')
-		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-		link(href='/public/css/main.css', rel='stylesheet', type='text/css')
-		link(href='https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300', rel='stylesheet')
-	body
-		.container-fluid
-			.row
-				#left-col.col-md-6
-					a.menu.home(href='/') Home
-					p#menu-divide |
-					a.menu.logout(href='/logout') Logout
-					#user-stats
-						h1 Your stats
-						p
-							span Username: #{user.github.username}
-						p
-							span Display Name: #{user.github.displayName}
-						p
-							span Polls created: #{user.pollsCreated}
-						p
-							span Polls voted: #{user.pollsVoted}
-				#right-col.col-md-6.bg-accent
-					h1 Your polls made with <3
-					#poll-list
-						each poll in polls
-							li
-								a(href="/poll/#{poll.id}") #{poll.title}
-		script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
-		script(type='text/javascript', src='common/ajax-functions.js')
-		script(type='text/javascript', src='/public/js/main.js')
+extends ./layout
+block title
+	title Profile | Your polls and stats
+
+block left-content
+	#user-stats
+		h1 Your stats
+		p
+			span Username: #{user.github.username}
+		p
+			span Display Name: #{user.github.displayName}
+		p
+			span Polls created: #{user.pollsCreated}
+		p
+			span Polls voted: #{user.pollsVoted}
+
+block right-content
+	h1 Your polls made with <3
+	#poll-list
+		each poll in polls
+			li
+				a(href="/poll/#{poll.id}") #{poll.title}

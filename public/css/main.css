@@ -14,6 +14,10 @@ body {
 	height: 100%;
 }
 
+#left-col {
+	background-color: #fefefa;
+}
+
 h1 {
 	font-family: 'Roboto Slab', serif;	
 	position: relative;
@@ -32,21 +36,13 @@ a, a:hover, a:visited {
 	text-decoration: none;
 }
 
-nav {
-	background-color: red;
-}
-
 .home {
 	float: left;
 }
 
 .logout {
 	float: right;
-}
-
-.btn-container {	/* Styling for the div that contains the buttons */
-	margin: 0 auto;
-	text-align: center;
+	font-size: 1.5em;
 }
 
 .btn {	/* Styling for buttons */
@@ -59,7 +55,7 @@ nav {
 	padding: 10px 5px;
 	width: 100px;
 	font-weight: 500;
-	margin: 0px 10px;
+	margin: 0px 10px 5px 10px;
 }
 
 .btn:hover {
@@ -84,6 +80,28 @@ nav {
 }
 
 
+/****** Pop up ******/
+.popup {
+	background: rgba(100, 100, 100, 0.8);
+	position: fixed;
+	display: none;
+	z-index: 5000;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	padding: 5%;
+}
+
+.popup i {
+	margin-right: 10px;
+}
+
+.btn-close {
+	margin-top: 20px;
+}
+
+
 /***** Poll list for main & profile page ******/
 #poll-list li {
 	display: inline-block;
@@ -91,7 +109,7 @@ nav {
 	border-radius: 10px;
 	padding: 5px;
 	margin: 5px;
-	font-size: 1.2em;
+	font-size: 1.1em;
 }
 
 #poll-list li:hover {
@@ -136,18 +154,13 @@ nav {
 /****** Profile Styling ******/
 #user-stats {
 	border: solid 2px #000000;
-	margin: 0% 2%;
+	margin: 0% 1%;
+	clear: left;
 }
 
 #user-stats h1, p {
 	position: relative;
 	left: 10%;
-}
-
-#menu-divide {
-	color: #FFFFFF;
-	display: inline;
-	margin: 0;
 }
 
 
@@ -231,6 +244,7 @@ nav {
 
 .btn-vote {
 	margin-top: 10px;
+	width: 80%;
 }
 
 #pollChart {
@@ -274,15 +288,15 @@ input[type=radio]{
 }
 
 #poll-new-title {
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0;
-    font-size: 1.5em;
-    height: auto;
-    color: #000000;
-    text-decoration: underline #A2DED0;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  font-size: 1.5em;
+  height: auto;
+  color: #000000;
+  text-decoration: underline #A2DED0;
 }
 
 #data-display {

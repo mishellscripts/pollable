@@ -1,0 +1,32 @@
+doctype html
+html
+	head
+		block title
+		link(rel='shortcut icon', type='image/icon', href='/public/img/pollable_logo.ico')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		link(href='/public/css/main.css', rel='stylesheet', type='text/css')
+		link(href='https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300', rel='stylesheet')
+	body
+		.loader
+		.page.container-fluid(style='display:none')
+			.row
+				#left-col.col-md-6
+					nav 
+						a.menu.home(href='/') 
+							img(src='/public/img/pollable_logo.ico')
+						a.menu.logout(href='/logout') 
+							if loggedIn
+								i(class="fa fa-sign-out" aria-hidden="true")
+					block left-content
+				#right-col.col-md-6.bg-accent
+					block right-content
+		block popup
+	script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
+	script(src='https://use.fontawesome.com/82d62de1e5.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js', type='text/javascript')
+	script(type='text/javascript', src='common/ajax-functions.js')
+	script(type='text/javascript').
+		var data = JSON.parse('!{JSON.stringify(poll)}');
+	script(type='text/javascript', src='/public/js/main.js')
+	if !firstVote
+		script(type='text/javascript', src="/public/js/polls.js")

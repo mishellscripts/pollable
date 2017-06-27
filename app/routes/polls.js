@@ -2,6 +2,23 @@ var Poll = require('../models/polls.js');
 var User = require('../models/users.js');
 var async = require('async');
 
+module.exports.getPoll = function(req, res) {
+	Poll.findOne({'_id': req.params.pollid}, function(err, target) {
+		if (err) { 				
+			err.status = 404;
+   			return res.render('error', {errStatus: err.status,
+   					message: "Oh, no! Poll not found :<" });
+		}
+		// If firstVote (true), user cannot see the results
+		var firstVote = req.isAuthenticated() ? target.voters.indexOf(req.user._id) : true;
+		var removable = req.isAuthenticated() ? 
+		target.creator.toString() === req.user._id.toString() : false;
+		res.render('pollview', {poll: target, firstVote: firstVote, removable: removable,
+			loggedIn: req.isAuthenticated()
+		});
+	});	
+}
+
 module.exports.createPoll = function(req, res) {
     // Depending on # choices n, create array size n initialized to zeros
 	var numVotes = Array.apply(null, Array(req.body.choice.length))
@@ -33,6 +50,20 @@ module.exports.createPoll = function(req, res) {
          		return res.redirect('/poll/' + poll._id);
          	});
     });
+}
+
+module.exports.deletePoll = function(req, res) {
+	// Find the poll to delete in database
+	Poll.findOne({'_id': req.params.pollid}, function(err, target) {
+	if (err) { 				
+		err.status = 404;
+   		return res.render('error', {errStatus: err.status,
+   				message: "Oh, no! Poll not found :<" });
+	}
+	// Only delete if user is logged in and user is creator of poll
+	target.remove();
+	res.render('/');
+});
 }
 
 module.exports.vote = function(req, res) {
@@ -73,8 +104,8 @@ module.exports.vote = function(req, res) {
 					    return res.render('error', {errStatus: err.status,
            						message: "Oh, no! Error encountered"});
 					} 
-					return res.render('pollview', {script: '/public/js/polls.js', 
-						poll: target})
+					return res.render('pollview', {poll: target, firstVote: false, 
+										loggedIn: req.isAuthenticated()})
 				});
 		},
 	], function (err,result) {

@@ -1,39 +1,33 @@
-doctype html
-html
-	head
-		title Create a new poll
-		link(rel='shortcut icon', type='image/icon', href='/public/img/pollable_logo.ico')
-		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-		link(href='/public/css/main.css', rel='stylesheet', type='text/css')
-		link(href='https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300', rel='stylesheet')
-	body
-		.container-fluid
-			.row
-				#left-col.col-md-6.text-center
-					h1.h1-pad Create your own
-					form#poll-form(method='post')
-						#poll-choices.form-group(choices='2')
-							input#poll-new-title.form-control(type='text', name='title', placeholder='Type your title here')
-							input#data-display.form-control(type='text', name='data-display')
-							input.form-control.poll-new-option(type='text', name='choice', placeholder='Answer choice')
-							input.form-control.poll-new-option(type='text', name='choice', placeholder='Answer choice')
-						button.btn.bg-accent.btn-small-add(type='button') +
-						button.btn.btn-create.bg-accent(type='submit' onclick="submitForms()") Create
-				#right-col.col-md-6.bg-accent.data-options
-					h3 How you would like to display your data?
-					label
-						input(type='radio', name='data-choice', value='area')
-						i.fa.fa-area-chart(aria-hidden='true')
-					label
-						input(type='radio', name='data-choice', value='bar')
-						i.fa.fa-bar-chart(aria-hidden='true')
-					label
-						input(type='radio', name='data-choice', value='radar')
-						i.fa.fa-line-chart(aria-hidden='true')
-					label
-						input(type='radio', name='data-choice', value='pie')
-						i.fa.fa-pie-chart(aria-hidden='true')
-			script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
-			script(src='https://use.fontawesome.com/82d62de1e5.js')
-			script(type='text/javascript', src='common/ajax-functions.js')
-			script(type='text/javascript', src='/public/js/main.js')
+extends ./layout
+block title 
+	title Create a new poll
+block left-content
+	.text-center
+		h1.h1-pad Create your own
+		form#poll-form(method='post')
+			#poll-choices.form-group(choices='2')
+				input#poll-new-title.form-control(type='text', name='title', placeholder='Type your title here')
+				input#data-display.form-control(type='text', name='data-display')
+				input.form-control.poll-new-option(type='text', name='choice', placeholder='Answer choice')
+				input.form-control.poll-new-option(type='text', name='choice', placeholder='Answer choice')
+			button.btn.bg-accent.btn-small-add(type='button') +
+			button.btn.btn-create.bg-accent(type='submit' onclick="submitForms()") Create
+block right-content
+	.data-options
+		h3 How you would like to display your data?
+		label
+			input(type='radio', name='data-choice', value='area')
+			i.fa.fa-area-chart(aria-hidden='true')
+		label
+			input(type='radio', name='data-choice', value='bar')
+			i.fa.fa-bar-chart(aria-hidden='true')
+		label
+			input(type='radio', name='data-choice', value='radar')
+			i.fa.fa-line-chart(aria-hidden='true')
+		label
+			input(type='radio', name='data-choice', value='pie')
+			i.fa.fa-pie-chart(aria-hidden='true')
+block popup
+	.popup
+		h2 Sorry! You can only have a maximum of 5 options
+		button.btn.btn-close Close

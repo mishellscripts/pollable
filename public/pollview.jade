@@ -1,32 +1,41 @@
-doctype html
-html
-	head
-		title Pollable | #{poll.title}
-		link(rel='shortcut icon', type='image/icon', href='/public/img/pollable_logo.ico')
-		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-		link(href='/public/css/main.css', rel='stylesheet', type='text/css')
-		link(href='https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300', rel='stylesheet')
-	body
-		.container-fluid
-			.row
-				#left-col.col-md-6.text-center
-					.form
-						form#poll-form(method='post')
-							h1.h1-pad #{poll.title}
-							ul
-								each choice in poll.choiceStrings
-									li
-										input(type='radio', id="#{choice}" value="#{choice}" name='choice')  
-										label(for="#{choice}")
-											|	#{choice}
-										.check
-							button.btn.btn-vote.bg-accent(type='submit') Vote
-				#right-col.col-md-6.bg-accent
-					canvas(id="pollChart")
-			script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
-			script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js', type='text/javascript')
-			script(type='text/javascript', src='common/ajax-functions.js')
-			script(type='text/javascript').
-				var data = JSON.parse('!{JSON.stringify(poll)}');
-			script(type='text/javascript', src='/public/js/main.js')
-			script(type='text/javascript', src="/public/js/polls.js")
+extends ./layout
+block title
+	title Pollable | #{poll.title}
+block left-content
+	.text-center
+		.form
+			form#poll-form(method='post')
+				h1.h1-pad #{poll.title}
+				ul
+					each choice in poll.choiceStrings
+						li
+							input(type='radio', id="#{choice}" value="#{choice}" name='choice')  
+							label(for="#{choice}")
+								|	#{choice}
+							.check
+				button.btn.btn-vote.bg-accent(type='submit') Vote
+		.btn-container
+			button.btn.btn-share 
+				i(class="fa fa-share-alt" aria-hidden="true")
+				| Share
+			if removable
+					button.btn.btn-delete(type='submit') Delete
+block right-content
+	if !firstVote
+		canvas(id="pollChart")
+block popup
+	.popup
+		h2 Share to
+		h3
+			a(href="https://www.facebook.com/sharer/sharer.php?u=https%3A//pollable-mishellscripts.c9users.io/poll/#{poll.id}")
+				i(class="fa fa-facebook" aria-hidden="true") 
+				| Facebook
+		h3
+			a(href="https://twitter.com/home?status=https%3A//pollable-mishellscripts.c9users.io/poll/#{poll.id}")
+				i(class="fa fa-twitter" aria-hidden="true") 
+				| Twitter
+		h3
+			a(href="https://plus.google.com/share?url=https%3A//pollable-mishellscripts.c9users.io/poll/#{poll.id}")
+				i(class="fa fa-google-plus" aria-hidden="true") 
+				| Google Plus				
+		button.btn.btn-close Close
