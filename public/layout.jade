@@ -14,12 +14,19 @@ html
 					nav 
 						a.menu.home(href='/') 
 							img(src='/public/img/pollable_logo.ico')
-						a.menu.logout(href='/logout') 
-							if loggedIn
-								i(class="fa fa-sign-out" aria-hidden="true")
+						if loggedIn
+							i(class="fa fa-sign-out logout" aria-hidden="true")
 					block left-content
 				#right-col.col-md-6.bg-accent
 					block right-content
+		.logout-alert
+			h2 Are you sure you want to log out?
+			button.btn.btn-logout Yes
+			button.btn.btn-close No
+		.delete-alert
+			h2 Are you sure you want to delete this poll?
+			button.btn.btn-delete-confirm Yes
+			button.btn.btn-close No
 		block popup
 	script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
 	script(src='https://use.fontawesome.com/82d62de1e5.js')

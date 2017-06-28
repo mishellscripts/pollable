@@ -27,13 +27,12 @@ module.exports = function (app, passport) {
 		.get(function(req, res) {
 			polls.getPoll(req, res);
 		})
-		.post(isLoggedIn, function(req, res) {
-			polls.vote(req, res);
-		})
 		.delete(isLoggedIn, function(req,res) {
 			polls.deletePoll(req, res);
 		})
-		;
+		.post(isLoggedIn, function(req, res) {
+			polls.vote(req, res);
+		});
 		
 
 	app.route('/')
@@ -75,16 +74,28 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, function (req, res) {
 			var pollIDs = req.user.polls;
 			var polls = [];
-			pollIDs.forEach(function(pollID) {
-				Poll.findOne({'_id': pollID}, function(err, pollByID) {
-            		if (err) throw err;
-            		polls.push(pollByID);
-            		if (pollIDs.length === polls.length) {
-            			res.render('profile', {polls: polls, user: req.user, 
-            								loggedIn: true});
-            		}
-            	})
-			});
+			if (pollIDs.length > 0) {
+				pollIDs.forEach(function(pollID) {
+					Poll.findById(pollID, function(err, poll) {
+	            		if (err) throw err;
+	            		polls.push(poll);
+	            		if (pollIDs.length === polls.length) {
+	            			return res.render('profile', {polls: polls, user: req.user, 
+	            								loggedIn: true});
+	            		}
+	            	})
+				});
+			} else {
+				return res.render('profile', {polls: polls, user: req.user, 
+	            								loggedIn: true});
+			}
+		});
+
+	app.route('/users')
+		.get(function(req, res){ 
+			User.find({}, function(err, results) {
+				res.send(results);
+			})
 		});
 
 	app.route('/auth/github')

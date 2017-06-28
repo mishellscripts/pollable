@@ -19,10 +19,11 @@ block left-content
 				i(class="fa fa-share-alt" aria-hidden="true")
 				| Share
 			if removable
-					button.btn.btn-delete(type='submit') Delete
+				button.btn.btn-delete(type='submit' value='Delete') Delete
 block right-content
 	if !firstVote
 		canvas(id="pollChart")
+
 block popup
 	.popup
 		h2 Share to

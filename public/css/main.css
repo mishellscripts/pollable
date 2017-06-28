@@ -42,7 +42,8 @@ a, a:hover, a:visited {
 
 .logout {
 	float: right;
-	font-size: 1.5em;
+	font-size: 2em;
+	cursor: pointer;
 }
 
 .btn {	/* Styling for buttons */
@@ -81,7 +82,7 @@ a, a:hover, a:visited {
 
 
 /****** Pop up ******/
-.popup {
+.popup, .logout-alert, .delete-alert {
 	background: rgba(100, 100, 100, 0.8);
 	position: fixed;
 	display: none;
@@ -93,7 +94,7 @@ a, a:hover, a:visited {
 	padding: 5%;
 }
 
-.popup i {
+.popup i, .logout-alert i, .delete-alert{
 	margin-right: 10px;
 }
 
@@ -191,7 +192,9 @@ a, a:hover, a:visited {
   font-weight: 300;
   font-size: 1.35em;
   z-index: 9;
-  margin-top: 10px;
+  margin: 10px 0px 10px 20px;
+  text-align: center;
+  overflow-x: auto;
   cursor: pointer;
   -webkit-transition: all 0.25s linear;
 }
@@ -269,6 +272,7 @@ input[type=radio]{
 	font-size: 10em;
     /*-webkit-text-stroke: 5px white;*/
     color: #383838;
+    cursor: pointer;
 }
 
 #poll-form {
@@ -301,4 +305,14 @@ input[type=radio]{
 
 #data-display {
 	display: none;
+}
+
+.enlarge {
+	transform: scale(1.2, 1.2);
+	-webkit-transform: scale(1.2, 1.2);
+	-moz-transform: scale(1.2, 1.2);
+}
+
+.grey-out {
+	color: #606060;
 }

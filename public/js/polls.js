@@ -1,4 +1,3 @@
-//alert(data.choiceVotes);
 var ctx = document.getElementById("pollChart").getContext('2d');
 
 var pollData = {

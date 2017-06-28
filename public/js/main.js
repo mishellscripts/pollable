@@ -20,8 +20,8 @@ $(document).ready(function() {
     fadeAndRedirect('.btn-new', '/poll/new');
     fadeAndRedirect('.btn-view', '/profile');  
     fadeAndRedirect('.home', '/');
-    fadeAndRedirect('.logout', '/logout');
     fadeAndRedirect('.login', '/login');
+    fadeAndRedirect('.btn-logout', '/logout');
     
     $('.btn-create').click(function() {
         $('.page').fadeOut(200);
@@ -40,9 +40,24 @@ $(document).ready(function() {
         }
     });
     
+    $('.logout').click(function() {
+        popupOpenClose($(".logout-alert"));
+    })
+    
+    $('.btn-delete').click(function() {
+        popupOpenClose($(".delete-alert"));
+    })
+    
+
     $("input[name='data-choice']").click(function(){
         var chosen = $("input[name='data-choice']:checked").val();
         $('#data-display').val(chosen);
+        var checked = $("input[name='data-choice']:checked").next();
+        var unchecked = $("input[name='data-choice']:not(:checked)").next();
+        checked.addClass('enlarge');
+        checked.removeClass('grey-out');
+        unchecked.removeClass('enlarge');
+        unchecked.addClass('grey-out');
     });
     
     function popupOpenClose(popup) {
@@ -59,25 +74,31 @@ $(document).ready(function() {
     	});
     
     	/* Close popup and remove errors if user clicks on cancel or close buttons */
-    	$('.btn-close').on("click", function() {
-    		if ($(".formElementError").is(':visible')) {
-    			$(".formElementError").remove();
+    	$('.btn-close').click( function() {
+    		if ($('.formElementError').is(':visible')) {
+    			$('.formElementError').remove();
     		}
     		$(popup).hide();
     	});
     }
     
-    $('.btn-share').on("click", function() {
-    	popupOpenClose($(".popup"));
+    $('.btn-share').on('click', function() {
+    	popupOpenClose($('.popup'));
     });
     
-    $('.btn-delete').on('click', function() {
-        $.ajax({
-            url: '/',
-            type: 'DELETE',
-            success: function(result) {
-                // Do something with the result
+    $('.btn-delete-confirm').on('click', function() {
+        window.location.href = '/';
+       $.ajax({ 
+           url: '/poll/' + data._id, 
+           type: 'DELETE',
+           success: function() { 
+               console.log('deleted');
+               $('.page').fadeOut(200);
+                return false;
+           }, 
+            error: function(jqXHR, textStatus, errorThrown) { 
+                console.log(textStatus);
             }
-        });
+        }); 
     });
 })
