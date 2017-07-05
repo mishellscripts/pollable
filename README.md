@@ -5,7 +5,7 @@
 
 Pollable is a fullstack JavaScript application where users can create own polls to share or contribute to other polls by voicing their own opinions. Pollable utilizes the ExpressJS web framework, MongoDB, and Node.js. Github authentication is used for security and login purposes and is accomplished by using [Passport](http://passportjs.org/). Pollable is built from a JavaScript boilerplate namely [Clementine](http://www.clementinejs.com/) for ease of development as the creator of this voting application is new to full stack JavaScript :)
 
-Demo: https://pollable-mishellscripts.c9users.io/
+Demo: Heroku deployment coming soon.
 
 
 ## Quick Start Guide
